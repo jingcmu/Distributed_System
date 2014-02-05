@@ -1,0 +1,31 @@
+configuration:
+  - name : alice
+    ip : 128.237.221.252
+    port : 11111 # This is the incoming port on which MP will listen
+                 # May be changed for further communication as usual
+  - name : bob
+    ip : 128.237.212.12
+    port : 21111
+  - name : charlie
+    ip : 128.237.221.252
+    port : 11112
+  - name : daphnie
+    ip : 128.237.212.12
+    port : 21112
+    
+sendRules:
+  - action : drop # Ack message number 4 from bob to alice will not be sent
+    src : alice
+    dest : bob
+    kind : k1
+  - action : delay
+    kind : k2
+  - action : duplicate
+    src : alice
+    seqNum : 5
+    
+receiveRules :
+  - action : duplicate # 3rd message from Charlie that anyone
+    kind : k3
+  - action : delay
+    kind : k4
