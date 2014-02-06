@@ -7,7 +7,7 @@ public class LogicalClockService extends ClockService {
 	}
 	
 	public TimeStamp getTimeStamp() {
-		this.timeStamp.updateTimeStamp(null);
+		this.timeStamp.updateTimeStamp(null); //update time stamp before return
 		return new LogicalTimeStamp(this.timeStamp);
 	} 
 	

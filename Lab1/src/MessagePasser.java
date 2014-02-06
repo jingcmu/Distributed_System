@@ -108,40 +108,42 @@ public class MessagePasser {
 		return null;
 	}
 
-	public void send(Message msg) {
+	public String send(Message msg) {
 		msg.setSrc(this.localName);
 		msg.setSeqNum(this.seqNum++);
-		if(msg instanceof TimeStampedMessage) {
-			ClockService clockService = ClockService.getInstance();
+		ClockService clockService = ClockService.getInstance(); //could be used in the whole func
+		if(msg instanceof TimeStampedMessage) {			
 			if(clockService == null) {
 				System.out.println("Failed to get ClockService.");
 				System.exit(1);
 			}
-			((TimeStampedMessage)msg).setTimeStamp(clockService.getTimeStamp());
+			//((TimeStampedMessage)msg).setTimeStamp(clockService.getTimeStamp()); //not to set time stamp here
 		}
 		String action = this.matchSendRule(msg);
 		if (action == null) {
 			this.sendMsg(msg);
 			this.sendBufLock.lock();
 			try {
-				this.clearSendDelayBuf();
+				this.clearSendDelayBuf(clockService);
 			} finally {
 				this.sendBufLock.unlock();
 			}
 		} else {
 			if (action.equals(Constants.actionDrop)) {
-				return;
+				return action;
 			} else if (action.equals(Constants.actionDuplicate)) {
+				((TimeStampedMessage)msg).setTimeStamp(clockService.getTimeStamp()); //set time stamp
 				this.sendMsg(msg);
 				this.sendBufLock.lock();
 				try {
-					this.clearSendDelayBuf();
+					this.clearSendDelayBuf(clockService);
 				} finally {
 					this.sendBufLock.unlock();
 				}
 				if(msg instanceof TimeStampedMessage) {
 					TimeStampedMessage dupeMsg = new TimeStampedMessage((TimeStampedMessage)msg);
 					dupeMsg.setDupe(true);
+					((TimeStampedMessage)dupeMsg).setTimeStamp(clockService.getTimeStamp()); //set time stamp again for dupeMsg
 					this.sendMsg(dupeMsg);
 				} else {
 					Message dupeMsg = new Message(msg);
@@ -157,6 +159,7 @@ public class MessagePasser {
 				}
 			}
 		}
+		return action;
 	}
 
 	public Message receive() {
@@ -221,9 +224,13 @@ public class MessagePasser {
 		}
 	}
 
-	private void clearSendDelayBuf() {
+	private void clearSendDelayBuf(ClockService clockService) {
 		while (!this.sendDelayBuf.isEmpty()) {
-			this.sendMsg(this.sendDelayBuf.remove());
+			Message msg = this.sendDelayBuf.remove();
+			if(msg instanceof TimeStampedMessage) {
+				((TimeStampedMessage)msg).setTimeStamp(clockService.getTimeStamp()); //set time stamp when really sending the message
+			}
+			this.sendMsg(msg);
 		}
 	}
 
@@ -378,4 +385,10 @@ public class MessagePasser {
 		}
 		return result;
 	}
+	
+	public void add2sendDelayBuf(Message e) {
+		this.sendDelayBuf.add(e);
+	}
 }
+
+

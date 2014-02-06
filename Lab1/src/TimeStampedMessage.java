@@ -1,7 +1,7 @@
 public class TimeStampedMessage extends Message {
 	private TimeStamp timeStamp;
 	
-	public TimeStampedMessage(String dest, String kind, Object data){
+	public TimeStampedMessage(String dest, String kind, Object data) {
 		super(dest, kind, data);
 	}
 	
