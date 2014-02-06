@@ -9,8 +9,8 @@ configuration:
   - name : charlie
     ip : 128.237.221.252
     port : 11112
-  - name : daphnie
-    ip : 128.237.212.12
+  - name : jing
+    ip : 192.168.1.102
     port : 21112
     
 sendRules:
