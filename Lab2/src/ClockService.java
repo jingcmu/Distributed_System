@@ -38,6 +38,10 @@ public abstract class ClockService {
 	
 	public abstract void updateTimeStamp(TimeStamp timeStamp);
 	
+	public abstract void increment();
+	
+	public abstract void updateTimeStamp(TimeStampedMessage message);
+	
 	/*
 	 * Create an instance of ClockService based on clockServiceType as singleton pattern
 	 */
@@ -56,4 +60,5 @@ public abstract class ClockService {
 	public static ClockService getInstance() {
 		return ClockService.clockService;
 	}
+
 }

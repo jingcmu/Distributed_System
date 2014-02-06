@@ -7,6 +7,7 @@ public class Message implements Serializable{
 	protected Object data;
 	protected Integer seqNum;
 	protected Boolean dupe;
+	protected Boolean isMulticast;
 	
 	public Message(String dest, String kind, Object data){
 		this.dest = dest;
@@ -58,5 +59,15 @@ public class Message implements Serializable{
 
 	public void setDupe(Boolean dupe) {
 		this.dupe = dupe;
-	}	
+	}
+
+	public Boolean getIsMulticast() {
+		return isMulticast;
+	}
+
+	public void setIsMulticast(Boolean isMulticast) {
+		this.isMulticast = isMulticast;
+	}
+	
+	
 }

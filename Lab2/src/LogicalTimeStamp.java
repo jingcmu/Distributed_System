@@ -27,6 +27,10 @@ public class LogicalTimeStamp extends TimeStamp {
 		return this.localTime;
 	}
 	
+	public void setLocalTime(int localTime) {
+		this.localTime = localTime;
+	}
+	
 	public void updateTimeStamp(TimeStamp timeStamp) {
 		this.localTime++;	// Increment local time
 		

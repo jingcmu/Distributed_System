@@ -1,9 +1,12 @@
+import java.util.HashMap;
 import java.util.List;
 
 public class Configuration {
 	private List<Node> configuration;
 	private List<Rule> sendRules;
 	private List<Rule> receiveRules;
+	
+	private HashMap<String, Group> groups; //groups
 	
 	public List<Node> getConfiguration() {
 		return configuration;
@@ -28,4 +31,16 @@ public class Configuration {
 	public void setReceiveRules(List<Rule> receiveRules) {
 		this.receiveRules = receiveRules;
 	}
+
+	public HashMap<String, Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(HashMap<String, Group> groups) {
+		this.groups = groups;
+	}
+
+	
+	
+	
 }
