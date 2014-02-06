@@ -30,6 +30,7 @@ public abstract class ClockService {
 			Yaml yaml = new Yaml(new Constructor(Configuration.class));
 			this.config = (Configuration) yaml.load(is);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Failed to parse configuration file.");
 		}
 	}

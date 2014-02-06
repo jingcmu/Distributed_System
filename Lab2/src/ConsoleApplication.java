@@ -10,7 +10,12 @@ public class ConsoleApplication {
 			System.exit(1);
 		} else {
 			ClockService.createInstance(args[0], args[1], args[2]);
-			MessagePasser.createInstance(args[0], args[1]);
+			try {
+				MessagePasser.createInstance(args[0], args[1]);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		MessagePasser msgPasser = MessagePasser.getInstance();
@@ -184,6 +189,7 @@ public class ConsoleApplication {
 				reader = new Scanner(System.in);
 				System.out.println("Invalid input. Please try again");
 				System.out.println();
+				e.printStackTrace();
 			}
 		}
 	}
