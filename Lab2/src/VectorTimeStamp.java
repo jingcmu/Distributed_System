@@ -77,6 +77,24 @@ public class VectorTimeStamp extends TimeStamp {
 		}
 	}
 	
+	public void updateTimeStamp(TimeStamp timeStamp, String src) {
+		/* Increment timeVector */
+		int srcTime = this.timeVector.get(src);
+		srcTime++;
+		this.timeVector.put(src, srcTime);
+		
+		/* Update timeVector with new time vector */
+		if (timeStamp != null) {
+			for (String s : this.timeVector.keySet()) {
+				int time = this.timeVector.get(s);
+				int updatedTime = ((VectorTimeStamp)timeStamp).getLocalTime().get(s);
+				if (updatedTime > time) {
+					this.timeVector.put(s, updatedTime);
+				}
+			}
+		}
+	}
+	
 	public String printTimeStamp() {
 		StringBuilder result = new StringBuilder();
 		result.append("[ ");
