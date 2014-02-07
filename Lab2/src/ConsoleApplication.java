@@ -108,11 +108,21 @@ public class ConsoleApplication {
 
 					TimeStampedMessage sendMsg = new TimeStampedMessage(nodes
 							.get(option - 1).getName(), kind, message);
-					msgPasser.send(sendMsg);
+					String action = msgPasser.send(sendMsg);
 					System.out.println("Finished sending message.");
 					
-					Message logSendMsg = new Message(args[3], Constants.logSendKind, sendMsg);
-					msgPasser.send(logSendMsg);
+					//If the msg's kind is delay, the log message should also be delayed
+					//If the msg's kind is drop, then no log message 
+					//If the msg's kind is dup, then log message should be duplicate, but here we only log the first message
+					if (action == null || !action.equals(Constants.actionDelay)) {
+						Message logSendMsg = new Message(args[3], Constants.logSendKind, sendMsg);
+						msgPasser.send(logSendMsg);
+					}
+					else {
+						//Message logSendMsg = new Message(args[3], Constants.logSendKind, sendMsg);
+						//msgPasser.add2sendDelayBuf(logSendMsg);
+					}
+					
 					System.out.println("Finished logging message.");
 					System.out.println();
 					break;
@@ -182,7 +192,7 @@ public class ConsoleApplication {
 				}
 			} catch (Exception e) {
 				reader = new Scanner(System.in);
-				System.out.println("Invalid input. Please try again");
+				System.out.println("Invalid input! Please try again");
 				System.out.println();
 			}
 		}
