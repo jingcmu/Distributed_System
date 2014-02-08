@@ -54,10 +54,10 @@ public class ConsoleApplication {
 						i++;
 						System.out.println(i + "> " + node.getName());
 					}
-					option = 0;
-					while (option < 1 || option > nodes.size()) {
+					int optionTmp = 0;
+					while (optionTmp < 1 || optionTmp > nodes.size()) {
 						System.out.print("Select destination: ");
-						option = reader.nextInt();
+						optionTmp = reader.nextInt();
 					}
 					reader.nextLine();
 					System.out.println();
@@ -76,7 +76,7 @@ public class ConsoleApplication {
 					}
 					System.out.println();
 
-					TimeStampedMessage TSMsg = new TimeStampedMessage(nodes.get(option - 1).getName(), kind, message);
+					TimeStampedMessage TSMsg = new TimeStampedMessage(nodes.get(optionTmp - 1).getName(), kind, message);
 					msgPasser.send(TSMsg);
 					System.out.println("Finished sending message.");
 					if(option == 2) {
@@ -94,10 +94,10 @@ public class ConsoleApplication {
 						i++;
 						System.out.println(i + "> " + g.getName());
 					}
-					option = 0;
-					while (option < 1 || option > groups.size()) {
+					int optionTmp = 0;
+					while (optionTmp < 1 || optionTmp > groups.size()) {
 						System.out.print("Select destination: ");
-						option = reader.nextInt();
+						optionTmp = reader.nextInt();
 					}
 					reader.nextLine();
 					System.out.println();
@@ -116,7 +116,7 @@ public class ConsoleApplication {
 					}
 					System.out.println();
 
-					TimeStampedMessage TSMsg = new TimeStampedMessage(groups.get(option - 1).getName(), kind, message);
+					TimeStampedMessage TSMsg = new TimeStampedMessage(groups.get(optionTmp - 1).getName(), kind, message);
 					msgPasser.send(TSMsg);
 					System.out.println("Finished sending message.");
 					if(option == 4) {
