@@ -6,7 +6,8 @@ public class Configuration {
 	private List<Rule> sendRules;
 	private List<Rule> receiveRules;
 	
-	private HashMap<String, Group> groups; //groups
+	private List<Group> groups; //groups
+	private HashMap<String, Group> hashgroup; //groups in hash form
 	
 	public List<Node> getConfiguration() {
 		return configuration;
@@ -32,15 +33,24 @@ public class Configuration {
 		this.receiveRules = receiveRules;
 	}
 
-	public HashMap<String, Group> getGroups() {
+	public List<Group> getGroups() {
 		return groups;
 	}
-
-	public void setGroups(HashMap<String, Group> groups) {
+	
+	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
 
+	public HashMap<String, Group> getHashroups() {
+		return hashgroup;
+	}	
 	
-	
-	
+    public void setHashroups() {
+    	hashgroup = new HashMap<String, Group>();
+    	for(Group g : groups) {
+    		g.setNodes(configuration);
+    		hashgroup.put(g.getName(), g);
+    	}
+	}
+
 }

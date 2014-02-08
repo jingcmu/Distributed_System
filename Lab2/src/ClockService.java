@@ -29,6 +29,7 @@ public abstract class ClockService {
 			InputStream is = new FileInputStream(file);
 			Yaml yaml = new Yaml(new Constructor(Configuration.class));
 			this.config = (Configuration) yaml.load(is);
+			this.config.setHashroups();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Failed to parse configuration file.");
