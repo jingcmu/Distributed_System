@@ -49,6 +49,10 @@ public class Message implements Serializable{
 	public Integer getSeqNum() {
 		return seqNum;
 	}
+	
+	public void setDest(String dest) {
+		this.dest = dest;
+	}
 
 	public void setSeqNum(Integer seqNum) {
 		this.seqNum = seqNum;
