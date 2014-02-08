@@ -1,8 +1,5 @@
-import java.io.EOFException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import java.util.Queue;
-import java.util.concurrent.locks.Lock;
 
 public class MessageHandler extends Thread{
 	private Socket socket;

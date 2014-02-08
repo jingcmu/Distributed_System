@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 public class VectorTimeStamp extends TimeStamp {
+	private static final long serialVersionUID = 1L;
 	private Map<String, Integer> timeVector;
 
 	public VectorTimeStamp(String localName, List<Node> configuration) {

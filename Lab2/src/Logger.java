@@ -7,8 +7,7 @@ import java.util.Scanner;
 public class Logger {
 	public static void main(String args[]) {
 		if(args.length != 3) {
-			System.out
-					.println("Usage : Application <Configuration File Name> <Local Name> <Clock Service Type>");
+			System.out.println("Usage : Application <Configuration File Name> <Local Name> <Clock Service Type>");
 			System.exit(1);
 		} else {
 			ClockService.createInstance(args[0], args[1], args[2]);
@@ -24,12 +23,13 @@ public class Logger {
 		
 		System.out.println("Welcome to the Logger!");
 		System.out.println("---------------------");
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		while (true) {
 			try {
-				System.out
-						.println("Please select one of the following options");
-				System.out.println("1> Show logs");
+				System.out.print("This is '" + args[1] + "' ===>");
+				System.out.println("Please select one of the following options");
+				System.out.println("1> Show logs with " + args[2] + " clock");
 				System.out.println("2> Exit");
 				System.out.print("Select option: ");
 

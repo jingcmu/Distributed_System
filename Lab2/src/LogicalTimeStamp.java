@@ -1,4 +1,5 @@
 public class LogicalTimeStamp extends TimeStamp {
+	private static final long serialVersionUID = 1L;
 	private int localTime;
 	
 	public LogicalTimeStamp(String localName) {

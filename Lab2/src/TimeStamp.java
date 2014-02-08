@@ -1,6 +1,7 @@
 import java.io.Serializable;
 
 public abstract class TimeStamp implements Serializable, Comparable<TimeStamp> {
+	private static final long serialVersionUID = 1L;
 	protected String localName;
 	
 	public TimeStamp(String localName) {

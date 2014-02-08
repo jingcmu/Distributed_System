@@ -1,4 +1,5 @@
 public class TimeStampedMessage extends Message {
+	private static final long serialVersionUID = 1L;
 	private TimeStamp timeStamp;
 	
 	public TimeStampedMessage(String dest, String kind, Object data){
