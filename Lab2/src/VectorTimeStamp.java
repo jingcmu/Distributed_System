@@ -59,12 +59,19 @@ public class VectorTimeStamp extends TimeStamp {
 	public Map<String, Integer> getLocalTime() {
 		return this.timeVector;
 	}
+	
+	@Override
+	public void increment() {
+		increment(localName);
+	}
+	
+	public void increment(String key) {
+		/* Increment timeVector */
+		timeVector.put(key, timeVector.get(key) + 1);
+	}
 
 	public void updateTimeStamp(TimeStamp timeStamp) {
-		/* Increment timeVector */
-		int localTime = this.timeVector.get(this.localName);
-		localTime++;
-		this.timeVector.put(this.localName, localTime);
+		increment(localName);
 		
 		/* Update timeVector with new time vector */
 		if (timeStamp != null) {
@@ -78,22 +85,35 @@ public class VectorTimeStamp extends TimeStamp {
 		}
 	}
 	
-	public void updateTimeStamp(TimeStamp timeStamp, String src) {
-		/* Increment timeVector */
-		int srcTime = this.timeVector.get(src);
-		srcTime++;
-		this.timeVector.put(src, srcTime);
+	public void updateTimeStampMulticast(TimeStampedMessage message) {
+		increment(message.oriSrc);
+	}
+	
+	/**
+	 * Ensure casual order
+	 * @param message
+	 * @param group 
+	 * @return
+	 */
+	public boolean isOrdered(TimeStampedMessage message) {
+		VectorTimeStamp messageTimeStamp = ((VectorTimeStamp)message.getTimeStamp());
+		int mySrc = timeVector.get(message.getOriSrc());
+		int src = messageTimeStamp.getLocalTime().get(message.getOriSrc());
+		//System.out.println(printTimeStamp());
+		//System.out.println(message.getTimeStamp().printTimeStamp());
+		if (mySrc + 1 < src) {
+			System.out.println(message.getOriSrc());
+			return false;
+		}
 		
-		/* Update timeVector with new time vector */
-		if (timeStamp != null) {
-			for (String s : this.timeVector.keySet()) {
-				int time = this.timeVector.get(s);
-				int updatedTime = ((VectorTimeStamp)timeStamp).getLocalTime().get(s);
-				if (updatedTime > time) {
-					this.timeVector.put(s, updatedTime);
-				}
+		for (String key : timeVector.keySet()) {
+			if (!key.equals(message.getOriSrc()) && messageTimeStamp.getLocalTime().get(key) > timeVector.get(key)) {
+				//System.out.println(key);
+				return false;
 			}
 		}
+		
+		return true;
 	}
 	
 	public String printTimeStamp() {
@@ -106,4 +126,6 @@ public class VectorTimeStamp extends TimeStamp {
 		result.append("]");
 		return new String(result);
 	}
+
+	
 }

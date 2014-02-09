@@ -3,15 +3,19 @@ import java.io.Serializable;
 public class Message implements Serializable{
 	private static final long serialVersionUID = 1L;
 	protected String src;
+	protected String oriSrc;
+	
 	protected String dest;
+	protected String destGroup;
+	
 	protected String kind;
 	protected Object data;
 	protected Integer seqNum;
 	protected Boolean dupe;
-	protected Boolean isMulticast;
 	
-	public Message(String dest, String kind, Object data){
+	public Message(String dest, String destGroup, String kind, Object data){
 		this.dest = dest;
+		this.destGroup = destGroup;
 		this.kind = kind;	
 		this.data = data;
 		this.dupe = false;
@@ -19,7 +23,9 @@ public class Message implements Serializable{
 	
 	public Message(Message msg){
 		this.src = msg.getSrc();
+		this.oriSrc = msg.oriSrc;
 		this.dest = msg.getDest();
+		this.destGroup = msg.destGroup;
 		this.kind = msg.getKind();
 		this.data = msg.getData();
 		this.seqNum = msg.getSeqNum();
@@ -66,13 +72,15 @@ public class Message implements Serializable{
 		this.dupe = dupe;
 	}
 
-	public Boolean getIsMulticast() {
-		return isMulticast;
+	public String getOriSrc() {
+		return oriSrc;
 	}
 
-	public void setIsMulticast(Boolean isMulticast) {
-		this.isMulticast = isMulticast;
+	public void setOriSrc(String oriSrc) {
+		this.oriSrc = oriSrc;
 	}
+	
+	
 	
 	
 }

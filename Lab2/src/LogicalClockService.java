@@ -14,15 +14,4 @@ public class LogicalClockService extends ClockService {
 	public void updateTimeStamp(TimeStamp timeStamp) {
 		this.timeStamp.updateTimeStamp(timeStamp);
 	}
-
-	@Override
-	public void increment() {
-		timeStamp.setLocalTime(timeStamp.getLocalTime() + 1);
-	}
-
-	@Override
-	public void updateTimeStamp(TimeStampedMessage message) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -6,6 +6,7 @@ public class Group {
 	private String name;		
 	private List<String> members;
 	private List<Node> nodes;
+	private VectorTimeStamp timestamp;
 
 	public String getName() {
 		return name;
@@ -34,5 +35,16 @@ public class Group {
 				this.nodes.add(node);
 			}
 		}
+		
  	}
+
+	public VectorTimeStamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(VectorTimeStamp timestamp) {
+		this.timestamp = timestamp;
+	}
+	
+	
 }

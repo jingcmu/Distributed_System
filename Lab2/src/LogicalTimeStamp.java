@@ -44,4 +44,10 @@ public class LogicalTimeStamp extends TimeStamp {
 	public String printTimeStamp() {
 		return String.valueOf(this.localTime);
 	}
+
+	@Override
+	public void increment() {
+		this.localTime++;
+		
+	}
 }

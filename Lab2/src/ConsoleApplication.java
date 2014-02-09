@@ -76,11 +76,11 @@ public class ConsoleApplication {
 					}
 					System.out.println();
 
-					TimeStampedMessage TSMsg = new TimeStampedMessage(nodes.get(optionTmp - 1).getName(), kind, message);
+					TimeStampedMessage TSMsg = new TimeStampedMessage(nodes.get(optionTmp - 1).getName(), null, kind, message);
 					msgPasser.send(TSMsg);
 					System.out.println("Finished sending message.");
 					if(option == 2) {
-						Message logSendMsg = new Message(args[3], Constants.logSendKind, TSMsg);
+						Message logSendMsg = new Message(args[3], null, Constants.logSendKind, TSMsg);
 						msgPasser.send(logSendMsg);
 						System.out.println("Finished logging message.");
 					}
@@ -116,11 +116,11 @@ public class ConsoleApplication {
 					}
 					System.out.println();
 
-					TimeStampedMessage TSMsg = new TimeStampedMessage(groups.get(optionTmp - 1).getName(), kind, message);
+					TimeStampedMessage TSMsg = new TimeStampedMessage(null, groups.get(optionTmp - 1).getName(), kind, message);
 					msgPasser.send(TSMsg);
 					System.out.println("Finished sending message.");
 					if(option == 4) {
-						Message logSendMsg = new Message(args[3], Constants.logSendKind, TSMsg);
+						Message logSendMsg = new Message(args[3], null, Constants.logSendKind, TSMsg);
 						msgPasser.send(logSendMsg);
 						System.out.println("Finished logging message.");
 					}
@@ -137,7 +137,7 @@ public class ConsoleApplication {
 						System.out.println("Dupe: " + recvMsg.isDupe());
 						System.out.println("TimeStamp: " + recvMsg.getTimeStamp().printTimeStamp());
 						if(option == 6) {
-							Message logSendMsg = new Message(args[3], Constants.logRecvKind, recvMsg);
+							Message logSendMsg = new Message(args[3], null, Constants.logRecvKind, recvMsg);
 							msgPasser.send(logSendMsg);
 							System.out.println();
 							System.out.println("Finished logging message.");

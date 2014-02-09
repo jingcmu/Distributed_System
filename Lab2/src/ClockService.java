@@ -29,7 +29,7 @@ public abstract class ClockService {
 			InputStream is = new FileInputStream(file);
 			Yaml yaml = new Yaml(new Constructor(Configuration.class));
 			this.config = (Configuration) yaml.load(is);
-			this.config.setHashroups();
+			this.config.postProcess();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Failed to parse configuration file.");
@@ -37,12 +37,6 @@ public abstract class ClockService {
 	}
 	
 	public abstract TimeStamp getTimeStamp();
-	
-	public abstract void updateTimeStamp(TimeStamp timeStamp);
-	
-	public abstract void increment();
-	
-	public abstract void updateTimeStamp(TimeStampedMessage message);
 	
 	/*
 	 * Create an instance of ClockService based on clockServiceType as singleton pattern

@@ -17,6 +17,8 @@ public abstract class TimeStamp implements Serializable, Comparable<TimeStamp> {
 	 */
 	public abstract void updateTimeStamp(TimeStamp timeStamp);
 	
+	public abstract void increment();
+	
 	/*
 	 * Return TimeStamp in printable format
 	 */

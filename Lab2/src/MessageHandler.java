@@ -21,7 +21,9 @@ public class MessageHandler extends Thread{
 				msgPasser.addMsgToBuf(msg);
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			msgPasser.removeSocketFromMap(src);
+			
 		}
 	}
 }
