@@ -7,7 +7,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 
 public abstract class ClockService {
 	private static ClockService clockService;	// Singleton pattern
-	protected String configFileName;
+	protected String configFileName; 
 	protected String localName;
 	protected Configuration config;
 	
