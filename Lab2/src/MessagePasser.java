@@ -413,4 +413,102 @@ public class MessagePasser {
 			}
 		return groups;
 	}
+
+	public static MessagePasser getMsgPasser() {
+		return msgPasser;
+	}
+
+	public static void setMsgPasser(MessagePasser msgPasser) {
+		MessagePasser.msgPasser = msgPasser;
+	}
+
+	public String getConfigFileName() {
+		return configFileName;
+	}
+
+	public void setConfigFileName(String configFileName) {
+		this.configFileName = configFileName;
+	}
+
+	public String getLocalName() {
+		return localName;
+	}
+
+	public void setLocalName(String localName) {
+		this.localName = localName;
+	}
+
+	public Configuration getConfig() {
+		return config;
+	}
+
+	public void setConfig(Configuration config) {
+		this.config = config;
+	}
+
+	public long getConfigLastModified() {
+		return configLastModified;
+	}
+
+	public void setConfigLastModified(long configLastModified) {
+		this.configLastModified = configLastModified;
+	}
+
+	public Node getLocalNode() {
+		return localNode;
+	}
+
+	public void setLocalNode(Node localNode) {
+		this.localNode = localNode;
+	}
+
+	public int getSeqNum() {
+		return seqNum;
+	}
+
+	public void setSeqNum(int seqNum) {
+		this.seqNum = seqNum;
+	}
+
+	public BlockingQueue<Message> getSendDelayBuf() {
+		return sendDelayBuf;
+	}
+
+	public void setSendDelayBuf(BlockingQueue<Message> sendDelayBuf) {
+		this.sendDelayBuf = sendDelayBuf;
+	}
+
+	public BlockingQueue<Message> getRecvDelayBuf() {
+		return recvDelayBuf;
+	}
+
+	public void setRecvDelayBuf(BlockingQueue<Message> recvDelayBuf) {
+		this.recvDelayBuf = recvDelayBuf;
+	}
+
+	public BlockingQueue<Message> getRecvBuf() {
+		return recvBuf;
+	}
+
+	public void setRecvBuf(BlockingQueue<Message> recvBuf) {
+		this.recvBuf = recvBuf;
+	}
+
+	public BlockingQueue<TimeStampedMessage> getHoldBackBuf() {
+		return holdBackBuf;
+	}
+
+	public void setHoldBackBuf(BlockingQueue<TimeStampedMessage> holdBackBuf) {
+		this.holdBackBuf = holdBackBuf;
+	}
+
+	public ConcurrentHashMap<String, Socket> getNode2socket() {
+		return node2socket;
+	}
+
+	public void setNode2socket(ConcurrentHashMap<String, Socket> node2socket) {
+		this.node2socket = node2socket;
+	}
+	
+	
 }
