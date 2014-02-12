@@ -80,7 +80,7 @@ public class ConsoleApplication {
 					msgPasser.send(TSMsg);
 					System.out.println("Finished sending message.");
 					if(option == 2) {
-						Message logSendMsg = new Message(args[3], null, Constants.logSendKind, TSMsg);
+						TimeStampedMessage logSendMsg = new TimeStampedMessage(args[3], null, Constants.logSendKind, TSMsg);
 						msgPasser.send(logSendMsg);
 						System.out.println("Finished logging message.");
 					}
@@ -120,7 +120,7 @@ public class ConsoleApplication {
 					msgPasser.send(TSMsg);
 					System.out.println("Finished sending message.");
 					if(option == 4) {
-						Message logSendMsg = new Message(args[3], null, Constants.logSendKind, TSMsg);
+						TimeStampedMessage logSendMsg = new TimeStampedMessage(args[3], null, Constants.logSendKind, TSMsg);
 						msgPasser.send(logSendMsg);
 						System.out.println("Finished logging message.");
 					}
@@ -137,7 +137,7 @@ public class ConsoleApplication {
 						System.out.println("Dupe: " + recvMsg.isDupe());
 						System.out.println("TimeStamp: " + recvMsg.getTimeStamp().printTimeStamp());
 						if(option == 6) {
-							Message logSendMsg = new Message(args[3], null, Constants.logRecvKind, recvMsg);
+							TimeStampedMessage logSendMsg = new TimeStampedMessage(args[3], null, Constants.logRecvKind, recvMsg);
 							msgPasser.send(logSendMsg);
 							System.out.println();
 							System.out.println("Finished logging message.");
