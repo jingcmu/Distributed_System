@@ -6,6 +6,7 @@ public class Node{
 	private String ip;
 	private Integer port;
 	private ConcurrentHashMap<Integer, Boolean> received = new ConcurrentHashMap<Integer, Boolean>();
+	private Group votingGroup;
 	
 	
 	public String getName() {
@@ -38,6 +39,14 @@ public class Node{
 
 	public void setReceived(ConcurrentHashMap<Integer, Boolean> received) {
 		this.received = received;
+	}
+
+	public Group getVotingGroup() {
+		return votingGroup;
+	}
+
+	public void setVotingGroup(Group votingGroup) {
+		this.votingGroup = votingGroup;
 	}
 
 	
