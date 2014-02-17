@@ -1,0 +1,96 @@
+# Defines which nodes are used in the system and how to connect to them.
+# This element should only be referenced during the constructor's initial
+# setup.
+# All names must be unique.
+# No other nodes are known.
+# These names will be used for src and dest addresses for the Message
+# The local nodeâ€™s name is included in this list
+# A single, top-level section in the YAML file	
+# Group names must be unique	
+# Any number of members in the group	
+# As many groups as you’d like	
+configuration :
+ - name : alice 
+   ip : 127.0.0.1
+   port : 12359 # This is the incoming port on which MP will listen
+     # May be changed for further communication as usual
+ - name : bob 
+   ip : 127.0.0.1
+   port : 14255
+ - name : charlie
+   ip : 127.0.0.1
+   port : 12998
+ - name : daphnie
+   ip : 127.0.0.1
+   port : 1987
+ - name : erica
+   ip : 127.0.0.1
+   port : 19445
+ - name : frank
+   ip : 127.0.0.1
+   port : 19888
+ - name : george
+   ip : 127.0.0.1
+   port : 14753
+
+sendRules :
+ - action : delay # Ack message number 2 from alice to bob will not be sent
+   src : bob
+   kind : MUTEX_REQUEST
+   seqNum : 30000
+ - action : delay # Every Lookup message in the system will be delayed
+   kind : Lookup
+   seqNum : 30000
+ 
+receiveRules :
+ - action : drop # Request message number 1 from bob to charlie will be duplicated
+   src : alice
+   dest : charlie
+   seqNum : 30000
+ - action : duplicate # message number 2 from alice to bob will be ignored
+   src : alice
+   dest : bob
+   kind : Ack
+   seqNum : 30000
+ - action : delay # message number 2 from alice to bob will be ignored
+   kind : Request
+   seqNum : 30000
+groups :
+ - name : group_alice
+   members : 
+    - alice
+    - bob
+    - charlie
+ - name : group_bob
+   members :
+    - bob
+    - daphnie
+    - frank
+ - name : group_charlie
+   members :
+    - charlie
+    - erica
+    - frank
+ - name : group_daphnie
+   members :
+    - alice
+    - daphnie
+    - erica
+ - name : group_erica
+   members : 
+    - bob
+    - erica
+    - george
+ - name : group_frank
+   members :
+    - alice
+    - frank
+    - george
+ - name : group_george
+   members :
+    - charlie
+    - daphnie
+    - george
+
+    
+

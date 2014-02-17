@@ -1,0 +1,14 @@
+Roles of Different Classes in the System : 
+
+Message Passer : Main class which provides unicast service
+	PeerAcceptor : Thread which accepts incoming connections
+	PeerConnector : Thread that attempts connecting to peers after every 10 seconds, 
+					If peer comes up later on, this thread will automatically connect to it,
+	MessageListener : Thread which keeps on listening on a socket created by PeerAcceptor, 
+		<one Message Listener per peer>
+	
+Multicast Service :
+	Multicast Group : has a holdback queue and a vector clock of itself to causally order messages.
+	NACK sender : When message are partially received only from some members,
+					NACK sender will send unicast requests to peer from which message is pending.
+						
